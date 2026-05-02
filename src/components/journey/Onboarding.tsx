@@ -5,6 +5,9 @@ import { useAppState } from '@/app/journey/context';
 import { getOnboardingContent } from '@/lib/content/loader';
 import { focusMainHeading } from '@/lib/accessibility/aria';
 import { StepProgress } from '@/components/journey/StepProgress';
+import { StepContainer } from '@/components/journey/StepContainer';
+import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
 
 export function Onboarding() {
   const { state, dispatch } = useAppState();
@@ -15,28 +18,24 @@ export function Onboarding() {
   }, []);
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-white">
-      <section className="max-w-md w-full" aria-labelledby="main-heading">
-        <StepProgress currentStep={1} totalSteps={5} />
-        <h1 id="main-heading" className="text-3xl font-bold text-gray-800 mb-8 text-center">{currentContent.title}</h1>
+    <StepContainer>
+      <StepProgress currentStep={1} totalSteps={5} />
+      <Card ariaLabelledBy="main-heading">
+        <h1 id="main-heading" className="text-3xl font-bold text-[var(--color-brand-charcoal)] mb-8 text-center">{currentContent.title}</h1>
         <ul className="space-y-4 mb-12" aria-label="Onboarding steps">
           {currentContent.steps.map((step, idx) => (
-            <li key={idx} className="flex items-center text-lg text-gray-700 p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-100">
-              <span className="w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-800 font-bold rounded-full mr-4 shrink-0" aria-hidden="true">
+            <li key={idx} className="flex items-center text-lg text-gray-700 font-medium">
+              <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-indigo-100 text-[var(--color-brand-indigo)] rounded-full mr-4" aria-hidden="true">
                 {idx + 1}
               </span>
-              {step.replace(/^\d+\.\s*/, '')}
+              {step}
             </li>
           ))}
         </ul>
-        <button
-          aria-label={currentContent.nextBtn}
-          onClick={() => dispatch({ type: 'NEXT' })}
-          className="w-full px-6 py-4 bg-blue-600 text-white font-bold rounded-xl shadow hover:bg-blue-700 transition-colors"
-        >
+        <Button onClick={() => dispatch({ type: 'NEXT' })}>
           {currentContent.nextBtn}
-        </button>
-      </section>
-    </main>
+        </Button>
+      </Card>
+    </StepContainer>
   );
 }

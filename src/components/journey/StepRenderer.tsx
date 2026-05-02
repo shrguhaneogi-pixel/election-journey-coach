@@ -10,17 +10,27 @@ import { Checklist } from './Checklist';
 import { Rehearsal } from './Rehearsal';
 import { Result } from './Result';
 
+import { AnimatePresence } from 'framer-motion';
+
 export function StepRenderer() {
   const { state } = useAppState();
 
-  switch (state.currentState) {
-    case 'LANDING': return <Landing />;
-    case 'ONBOARDING': return <Onboarding />;
-    case 'LANGUAGE_SELECT': return <LanguageSelect />;
-    case 'TIMELINE': return <Timeline />;
-    case 'CHECKLIST': return <Checklist />;
-    case 'REHEARSAL': return <Rehearsal />;
-    case 'RESULT': return <Result />;
-    default: return <Landing />;
-  }
+  const renderStep = () => {
+    switch (state.currentState) {
+      case 'LANDING': return <Landing key="landing" />;
+      case 'ONBOARDING': return <Onboarding key="onboarding" />;
+      case 'LANGUAGE_SELECT': return <LanguageSelect key="language" />;
+      case 'TIMELINE': return <Timeline key="timeline" />;
+      case 'CHECKLIST': return <Checklist key="checklist" />;
+      case 'REHEARSAL': return <Rehearsal key="rehearsal" />;
+      case 'RESULT': return <Result key="result" />;
+      default: return <Landing key="default" />;
+    }
+  };
+
+  return (
+    <AnimatePresence mode="wait">
+      {renderStep()}
+    </AnimatePresence>
+  );
 }

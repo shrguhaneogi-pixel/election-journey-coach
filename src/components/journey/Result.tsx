@@ -5,6 +5,9 @@ import { useAppState } from '@/app/journey/context';
 import { getOnboardingContent } from '@/lib/content/loader';
 import { focusMainHeading } from '@/lib/accessibility/aria';
 import { getReminderMessage } from '@/lib/notifications/local';
+import { StepContainer } from '@/components/journey/StepContainer';
+import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
 
 export function Result() {
   const { state, dispatch } = useAppState();
@@ -20,37 +23,34 @@ export function Result() {
   const isReady = score === 100;
 
   return (
-    <main className={`flex flex-col items-center justify-center min-h-screen p-8 text-center transition-colors ${isReady ? 'bg-green-50' : 'bg-orange-50'}`}>
-      <section className="max-w-md w-full" aria-labelledby="main-heading">
-        <h1 id="main-heading" className={`text-4xl font-extrabold mb-4 ${isReady ? 'text-green-800' : 'text-orange-800'}`}>
+    <StepContainer>
+      <Card className="text-center bg-transparent shadow-none" ariaLabelledBy="main-heading">
+        <h1 id="main-heading" className={`text-4xl font-extrabold mb-4 ${isReady ? 'text-[var(--color-brand-green)]' : 'text-[var(--color-brand-gold)]'}`}>
           {currentContent.title}
         </h1>
         
         <div 
           className="text-7xl font-black mb-8 drop-shadow-sm"
-          style={{ color: isReady ? '#22c55e' : '#f97316' }}
+          style={{ color: isReady ? 'var(--color-brand-green)' : 'var(--color-brand-gold)' }}
           aria-label={`Score: ${score}%`}
         >
           {score}%
         </div>
 
-        <p className="text-xl text-gray-700 mb-6 font-medium" aria-live="polite">
+        <p className="text-xl text-[var(--color-brand-charcoal)] mb-6 font-medium" aria-live="polite">
           {isReady ? currentContent.readyMessage : currentContent.notReadyMessage}
         </p>
 
         {reminder && (
-          <div className="mb-10 p-4 bg-yellow-100 text-yellow-800 border-l-4 border-yellow-500 rounded-r shadow-sm text-left font-semibold">
+          <div className="mb-10 p-4 bg-orange-50 text-orange-900 border-l-4 border-[var(--color-brand-gold)] rounded-r shadow-sm text-left font-semibold">
             🔔 {reminder}
           </div>
         )}
 
-        <button
-          onClick={() => dispatch({ type: 'RESTART' })}
-          className="px-8 py-4 bg-gray-900 text-white font-bold rounded-full shadow hover:bg-black transition-transform transform hover:scale-105 active:scale-95 focus:ring-4 focus:ring-gray-300"
-        >
-          {currentContent.restartBtn}
-        </button>
-      </section>
-    </main>
+        <Button onClick={() => dispatch({ type: 'RESTART' })}>
+          Restart Journey
+        </Button>
+      </Card>
+    </StepContainer>
   );
 }

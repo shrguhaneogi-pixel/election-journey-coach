@@ -38,15 +38,15 @@ export function ExplainButton({ context }: ExplainButtonProps) {
   };
 
   return (
-    <div className="mt-2">
+    <div className="mt-3 w-full">
       <button 
-        type="button" // Important to not submit forms
+        type="button"
         onClick={(e) => {
           e.preventDefault();
-          e.stopPropagation(); // Don't trigger parent clicks (like checklist toggles)
+          e.stopPropagation();
           handleExplain();
         }}
-        className="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1"
+        className="text-sm font-bold text-[var(--color-brand-indigo)] hover:text-indigo-800 transition-colors flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-indigo-50"
         aria-expanded={!!explanation}
       >
         <span aria-hidden="true">✨</span> 
@@ -55,10 +55,11 @@ export function ExplainButton({ context }: ExplainButtonProps) {
 
       {explanation && (
         <div 
-          className="mt-2 p-3 bg-blue-50 border border-blue-100 rounded-lg text-sm text-gray-700 animate-in fade-in slide-in-from-top-2"
+          className="mt-3 p-5 bg-white border border-gray-100 shadow-md rounded-xl text-sm text-gray-800 leading-relaxed relative animate-in fade-in slide-in-from-top-2"
           role="region"
           aria-live="polite"
         >
+          <div className="absolute top-0 left-4 -mt-2 w-4 h-4 bg-white border-t border-l border-gray-100 rotate-45"></div>
           {explanation}
         </div>
       )}

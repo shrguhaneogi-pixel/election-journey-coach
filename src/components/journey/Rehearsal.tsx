@@ -6,6 +6,9 @@ import { getRehearsalContent, getChecklistContent } from '@/lib/content/loader';
 import { focusMainHeading } from '@/lib/accessibility/aria';
 import { ExplainButton } from '@/components/journey/ExplainButton';
 import { StepProgress } from '@/components/journey/StepProgress';
+import { StepContainer } from '@/components/journey/StepContainer';
+import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
 
 export function Rehearsal() {
   const { state, dispatch } = useAppState();
@@ -51,14 +54,14 @@ export function Rehearsal() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-white">
-      <section className="max-w-md w-full" aria-labelledby="main-heading">
-        <StepProgress currentStep={5} totalSteps={5} />
-        <div className="text-sm text-blue-500 font-bold tracking-wider mb-2 uppercase text-center" aria-live="polite">
+    <StepContainer>
+      <StepProgress currentStep={5} totalSteps={5} />
+      <Card ariaLabelledBy="main-heading">
+        <div className="text-sm text-[var(--color-brand-indigo)] font-bold tracking-wider mb-2 uppercase text-center" aria-live="polite">
           {currentContent.title} • {currentQuestionIdx + 1} / {questions.length}
         </div>
         
-        <h1 id="main-heading" className="text-2xl font-bold text-gray-800 mb-2 text-center min-h-[4rem]">
+        <h1 id="main-heading" className="text-2xl font-bold text-[var(--color-brand-charcoal)] mb-2 text-center min-h-[4rem]">
           {currentQuestion.text}
         </h1>
         <div className="flex justify-center mb-8">
@@ -72,10 +75,10 @@ export function Rehearsal() {
               role="radio"
               aria-checked={selectedAnswer === idx}
               onClick={() => handleSelectOption(idx)}
-              className={`w-full text-left p-4 rounded-xl border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              className={`w-full text-left p-4 rounded-xl border-2 transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-indigo)] ${
                 selectedAnswer === idx 
-                  ? 'border-blue-500 bg-blue-50 text-blue-800 font-bold' 
-                  : 'border-gray-200 text-gray-700 hover:border-blue-300'
+                  ? 'border-[var(--color-brand-indigo)] bg-indigo-50 text-indigo-800 font-bold' 
+                  : 'border-gray-200 text-gray-700 hover:border-indigo-300'
               }`}
             >
               {option}
@@ -83,19 +86,13 @@ export function Rehearsal() {
           ))}
         </div>
 
-        <button
+        <Button
           onClick={handleNext}
           disabled={selectedAnswer === undefined}
-          aria-disabled={selectedAnswer === undefined}
-          className={`w-full px-6 py-4 font-bold rounded-xl shadow transition-colors focus:ring-4 focus:ring-blue-300 ${
-            selectedAnswer !== undefined 
-              ? 'bg-blue-600 text-white hover:bg-blue-700' 
-              : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-          }`}
         >
           {currentQuestionIdx < questions.length - 1 ? 'Next Question' : currentContent.nextBtn}
-        </button>
-      </section>
-    </main>
+        </Button>
+      </Card>
+    </StepContainer>
   );
 }

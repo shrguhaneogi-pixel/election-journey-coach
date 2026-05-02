@@ -3,6 +3,25 @@
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Trust Palette */
+  --color-brand-charcoal: #1A1A1A;
+  --color-brand-softbg: #F7F7F8;
+  --color-brand-indigo: #4F46E5;
+  --color-brand-green: #16A34A;
+  --color-brand-gold: #F59E0B;
+
+  /* Semantic Colors */
+  --color-semantic-success: #16A34A;
+  --color-semantic-warning: #F59E0B;
+  --color-semantic-error: #DC2626;
+  --color-semantic-info: #4F46E5;
+}
+
+body {
+  font-variant-numeric: tabular-nums; /* Tabular numbers as required by design */
+  background-color: var(--color-brand-softbg);
+  color: var(--color-brand-charcoal);
 }
 
 @layer base {
