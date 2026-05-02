@@ -5,6 +5,7 @@ import { useAppState } from '@/app/journey/context';
 import { getChecklistContent } from '@/lib/content/loader';
 import { focusMainHeading } from '@/lib/accessibility/aria';
 import { onKeyboardClick } from '@/lib/accessibility/keyboard';
+import { ExplainButton } from '@/components/journey/ExplainButton';
 
 export function Checklist() {
   const { state, dispatch } = useAppState();
@@ -37,9 +38,12 @@ export function Checklist() {
                 }`}>
                   {isChecked && <span className="text-white text-sm">✓</span>}
                 </div>
-                <span className={`text-lg font-medium ${isChecked ? 'text-green-800 line-through opacity-75' : 'text-gray-700'}`}>
-                  {item.label}
-                </span>
+                <div className="flex flex-col flex-1">
+                  <span className={`text-lg font-medium ${isChecked ? 'text-green-800 line-through opacity-75' : 'text-gray-700'}`}>
+                    {item.label}
+                  </span>
+                  <ExplainButton context={`Checklist item: ${item.label}`} />
+                </div>
                 <input 
                   type="checkbox" 
                   className="sr-only" 

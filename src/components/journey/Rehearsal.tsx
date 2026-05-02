@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useAppState } from '@/app/journey/context';
 import { getRehearsalContent, getChecklistContent } from '@/lib/content/loader';
 import { focusMainHeading } from '@/lib/accessibility/aria';
+import { ExplainButton } from '@/components/journey/ExplainButton';
 
 export function Rehearsal() {
   const { state, dispatch } = useAppState();
@@ -55,9 +56,12 @@ export function Rehearsal() {
           {currentContent.title} • {currentQuestionIdx + 1} / {questions.length}
         </div>
         
-        <h1 id="main-heading" className="text-2xl font-bold text-gray-800 mb-8 text-center min-h-[4rem]">
+        <h1 id="main-heading" className="text-2xl font-bold text-gray-800 mb-2 text-center min-h-[4rem]">
           {currentQuestion.text}
         </h1>
+        <div className="flex justify-center mb-8">
+          <ExplainButton context={`Question: ${currentQuestion.text}`} />
+        </div>
         
         <div className="space-y-4 mb-12" role="radiogroup" aria-labelledby="main-heading">
           {currentQuestion.options.map((option, idx) => (

@@ -19,3 +19,10 @@
 - Accessibility is mandatory for all components
 - Voice features must be optional enhancements
 - No API calls inside UI components
+
+## Phase 5 Rules
+- AI must NEVER control logic or state
+- AI only explains existing content
+- All AI calls must go through API routes
+- All responses must be validated
+- UI must fallback gracefully if AI fails
