@@ -1,11 +1,17 @@
 'use client';
 
-import React, { createContext, useContext, useReducer, useEffect, useState } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useRef, useState, useCallback } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/lib/firebase/client';
 import { loadJourneyState, saveJourneyState } from '@/lib/firebase/journey-store';
 import { appReducer, initialState } from '@/lib/journey/state-machine';
 import { MachineState, Action } from '@/types/journey';
+
+/** Map our internal lang codes to BCP-47 for the HTML lang attribute */
+const LANG_TO_BCP47: Record<string, string> = { en: 'en', es: 'es', hi: 'hi' };
+
+/** Debounce delay for Firestore writes — batches rapid dispatches into one save */
+const SAVE_DEBOUNCE_MS = 1_500;
 
 interface StateContextType {
   state: MachineState;
@@ -20,8 +26,15 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(appReducer, initialState);
   const [user, setUser] = useState<User | null>(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Handle Authentication & Hydration
+  // ── Dynamic document.lang for correct screen-reader pronunciation ─────────
+  useEffect(() => {
+    const bcp47 = LANG_TO_BCP47[state.context.language] ?? 'en';
+    document.documentElement.lang = bcp47;
+  }, [state.context.language]);
+
+  // ── Authentication & Hydration ────────────────────────────────────────────
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
@@ -32,10 +45,9 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
             dispatch({ type: 'HYDRATE', payload: savedState });
           }
         } catch (error) {
-          console.error("Error loading journey state", error);
+          console.error('Error loading journey state', error);
         }
       } else {
-        // If logged out, reset to initial state
         dispatch({ type: 'HYDRATE', payload: initialState });
       }
       setLoadingAuth(false);
@@ -44,14 +56,29 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
     return () => unsubscribe();
   }, []);
 
-  // Handle Persistence on State Change
+  // ── Debounced Persistence ─────────────────────────────────────────────────
+  // Rapid dispatches (e.g. toggling checklist items) are batched into a single
+  // Firestore write after SAVE_DEBOUNCE_MS of inactivity.
+  const debouncedSave = useCallback(
+    (uid: string, currentState: MachineState) => {
+      if (saveTimer.current) clearTimeout(saveTimer.current);
+      saveTimer.current = setTimeout(() => {
+        saveJourneyState(uid, currentState).catch(err =>
+          console.error('Error saving state', err),
+        );
+      }, SAVE_DEBOUNCE_MS);
+    },
+    [],
+  );
+
   useEffect(() => {
     if (user && !loadingAuth) {
-      saveJourneyState(user.uid, state).catch(err => {
-        console.error("Error saving state", err);
-      });
+      debouncedSave(user.uid, state);
     }
-  }, [state, user, loadingAuth]);
+    return () => {
+      if (saveTimer.current) clearTimeout(saveTimer.current);
+    };
+  }, [state, user, loadingAuth, debouncedSave]);
 
   return (
     <StateContext.Provider value={{ state, dispatch, user, loadingAuth }}>

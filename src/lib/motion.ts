@@ -1,8 +1,8 @@
-import { Variants } from 'framer-motion';
+import { Variants, Transition } from 'framer-motion';
 
 // Global Transition Curve
 // "Calm guidance": smooth acceleration, calm deceleration
-export const standardTransition = {
+export const standardTransition: Transition = {
   type: 'tween',
   ease: [0.22, 1, 0.36, 1], // cubic-bezier
   duration: 0.4,
@@ -22,22 +22,19 @@ export const pageVariants: Variants = {
   exit: {
     opacity: 0,
     x: -40,
-    transition: { ...standardTransition, duration: 0.3 },
+    transition: { type: 'tween', ease: [0.22, 1, 0.36, 1], duration: 0.3 },
   },
 };
 
 // Micro-interactions for buttons and interactive cards
-// Framer Motion automatically respects `prefers-reduced-motion` if we configure it,
-// or we can use useReducedMotion hook in components. For variants, we can provide 
-// a non-transforming fallback or rely on framer-motion's default reduced motion handling.
-export const microInteractionVariants = {
+export const microInteractionVariants: Variants = {
   hover: {
     scale: 1.02,
-    transition: { duration: 0.15 },
+    transition: { type: 'tween', duration: 0.15 },
   },
   tap: {
     scale: 0.98,
-    transition: { duration: 0.15 },
+    transition: { type: 'tween', duration: 0.15 },
   },
 };
 
@@ -45,5 +42,5 @@ export const microInteractionVariants = {
 export const fadeVariants: Variants = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: standardTransition },
-  exit: { opacity: 0, transition: { duration: 0.2 } },
+  exit: { opacity: 0, transition: { type: 'tween', duration: 0.2 } },
 };

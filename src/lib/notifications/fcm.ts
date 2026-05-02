@@ -1,9 +1,15 @@
 /**
- * Optional FCM stub. 
- * Fully implementing this requires a backend push server and a valid VAPID key.
- * This is left as a placeholder for future scalability.
+ * FCM push notification stub.
+ *
+ * Full implementation requires:
+ * - A VAPID key in .env.local (NEXT_PUBLIC_FIREBASE_VAPID_KEY)
+ * - A service worker (public/firebase-messaging-sw.js)
+ * - A backend push server
+ *
+ * Until those are configured, all notification features degrade gracefully
+ * via the local.ts reminder messages instead.
  */
 export async function getFCMToken(): Promise<string | null> {
-  console.warn("FCM Token retrieval is an optional enhancement not fully configured.");
+  // Not yet configured. Returns null so callers fall back to local reminders.
   return null;
 }

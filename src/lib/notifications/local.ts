@@ -1,10 +1,12 @@
+import { MachineState } from '@/types/journey';
+
 /**
  * Local Notification Utilities.
  * These functions inspect the state machine and provide contextual nudges
  * without requiring a backend push notification infrastructure.
  */
 
-export function getReminderMessage(state: any, lang: string): string | null {
+export function getReminderMessage(state: MachineState, lang: string): string | null {
   // Simplistic check: If rehearsal isn't finished and we are at the end...
   // In our state machine, if we are at RESULT but readinessScore < 100
   if (state.currentState === 'RESULT' && state.context.readinessScore < 100) {

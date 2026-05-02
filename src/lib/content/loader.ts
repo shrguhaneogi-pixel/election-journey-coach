@@ -12,22 +12,23 @@ import timelineData from '../../../content/journey/timeline.json';
 import checklistData from '../../../content/journey/checklist.json';
 import rehearsalData from '../../../content/journey/rehearsal.json';
 
+/** Shared cast helper — JSON files are untyped imports, this centralises the escape hatch */
+function getLocalized<T>(data: unknown, lang: Language): T {
+  return (data as LocalizedContent<T>)[lang];
+}
+
 export function getOnboardingContent(lang: Language): OnboardingContent {
-  const data = onboardingData as unknown as LocalizedContent<OnboardingContent>;
-  return data[lang];
+  return getLocalized<OnboardingContent>(onboardingData, lang);
 }
 
 export function getTimelineContent(lang: Language): TimelineContent {
-  const data = timelineData as unknown as LocalizedContent<TimelineContent>;
-  return data[lang];
+  return getLocalized<TimelineContent>(timelineData, lang);
 }
 
 export function getChecklistContent(lang: Language): ChecklistContent {
-  const data = checklistData as unknown as LocalizedContent<ChecklistContent>;
-  return data[lang];
+  return getLocalized<ChecklistContent>(checklistData, lang);
 }
 
 export function getRehearsalContent(lang: Language): RehearsalContent {
-  const data = rehearsalData as unknown as LocalizedContent<RehearsalContent>;
-  return data[lang];
+  return getLocalized<RehearsalContent>(rehearsalData, lang);
 }

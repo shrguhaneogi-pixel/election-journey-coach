@@ -1,13 +1,5 @@
-'use client';
-
 /**
- * Basic performance logging for the application.
+ * Performance metrics module.
+ * Reserved for future web-vitals integration (e.g. Core Web Vitals via next/vitals).
+ * Currently intentionally empty — do not add console.debug calls here.
  */
-export function logLoadTime() {
-  if (typeof window !== "undefined") {
-    // Standard web-vitals could be captured here. 
-    // For now, we'll log basic performance marks.
-    const loadTime = performance.now();
-    console.debug(`[Performance] Component Load Time: ${loadTime.toFixed(2)}ms`);
-  }
-}

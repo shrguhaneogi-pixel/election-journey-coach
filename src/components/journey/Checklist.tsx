@@ -37,7 +37,7 @@ export function Checklist() {
                     ? 'border-[var(--color-brand-green)] bg-green-50' 
                     : 'border-gray-200 hover:border-indigo-300'
                 }`}
-                onKeyDown={(e) => onKeyboardClick(e, () => dispatch({ type: 'TOGGLE_CHECKLIST_ITEM', payload: item.id }))}
+                onKeyDown={onKeyboardClick(() => dispatch({ type: 'TOGGLE_CHECKLIST_ITEM', payload: item.id }))}
               >
                 <div className={`mt-1 flex-shrink-0 w-6 h-6 rounded border-2 mr-4 flex items-center justify-center transition-colors ${
                   isChecked ? 'bg-[var(--color-brand-green)] border-[var(--color-brand-green)]' : 'border-gray-300'

@@ -11,7 +11,9 @@ interface StepContainerProps {
 
 export function StepContainer({ children, className = '' }: StepContainerProps) {
   return (
-    <motion.main 
+    <motion.div
+      role="region"
+      aria-label="Journey step"
       variants={pageVariants}
       initial="initial"
       animate="animate"
@@ -19,6 +21,7 @@ export function StepContainer({ children, className = '' }: StepContainerProps) 
       className={`flex flex-col items-center justify-center min-h-screen p-4 sm:p-8 w-full ${className}`}
     >
       {children}
-    </motion.main>
+    </motion.div>
   );
 }
+
