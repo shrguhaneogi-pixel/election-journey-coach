@@ -26,3 +26,10 @@
 - All AI calls must go through API routes
 - All responses must be validated
 - UI must fallback gracefully if AI fails
+
+## Phase 6 Rules
+- Calendar integration must use link-based approach (no OAuth)
+- Notifications must be optional and non-blocking
+- No backend complexity for reminders
+- Performance must be prioritized over features
+- Do not introduce heavy dependencies

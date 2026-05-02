@@ -5,6 +5,7 @@ import { useAppState } from '@/app/journey/context';
 import { getRehearsalContent, getChecklistContent } from '@/lib/content/loader';
 import { focusMainHeading } from '@/lib/accessibility/aria';
 import { ExplainButton } from '@/components/journey/ExplainButton';
+import { StepProgress } from '@/components/journey/StepProgress';
 
 export function Rehearsal() {
   const { state, dispatch } = useAppState();

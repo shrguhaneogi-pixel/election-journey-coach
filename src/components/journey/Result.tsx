@@ -4,11 +4,14 @@ import React, { useEffect } from 'react';
 import { useAppState } from '@/app/journey/context';
 import { getOnboardingContent } from '@/lib/content/loader';
 import { focusMainHeading } from '@/lib/accessibility/aria';
+import { getReminderMessage } from '@/lib/notifications/local';
 
 export function Result() {
   const { state, dispatch } = useAppState();
-  const currentContent = getOnboardingContent(state.context.language).result;
+  const lang = state.context.language;
+  const currentContent = getOnboardingContent(lang).result;
   const score = state.context.readinessScore;
+  const reminder = getReminderMessage(state, lang);
 
   useEffect(() => {
     focusMainHeading();
@@ -31,9 +34,15 @@ export function Result() {
           {score}%
         </div>
 
-        <p className="text-xl text-gray-700 mb-12 font-medium" aria-live="polite">
+        <p className="text-xl text-gray-700 mb-6 font-medium" aria-live="polite">
           {isReady ? currentContent.readyMessage : currentContent.notReadyMessage}
         </p>
+
+        {reminder && (
+          <div className="mb-10 p-4 bg-yellow-100 text-yellow-800 border-l-4 border-yellow-500 rounded-r shadow-sm text-left font-semibold">
+            🔔 {reminder}
+          </div>
+        )}
 
         <button
           onClick={() => dispatch({ type: 'RESTART' })}
