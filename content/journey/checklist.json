@@ -1,0 +1,29 @@
+{
+  "en": {
+    "title": "Document Checklist",
+    "items": [
+      { "id": "id_card", "label": "Valid Photo ID" },
+      { "id": "voter_card", "label": "Voter Registration Card" },
+      { "id": "polling_location", "label": "Know your polling location" }
+    ],
+    "nextBtn": "Next"
+  },
+  "es": {
+    "title": "Lista de Documentos",
+    "items": [
+      { "id": "id_card", "label": "Identificación con Foto Válida" },
+      { "id": "voter_card", "label": "Tarjeta de Registro de Votante" },
+      { "id": "polling_location", "label": "Conoce tu lugar de votación" }
+    ],
+    "nextBtn": "Siguiente"
+  },
+  "hi": {
+    "title": "दस्तावेज़ सूची",
+    "items": [
+      { "id": "id_card", "label": "वैध फोटो आईडी" },
+      { "id": "voter_card", "label": "मतदाता पंजीकरण कार्ड" },
+      { "id": "polling_location", "label": "अपने मतदान केंद्र को जानें" }
+    ],
+    "nextBtn": "अगला"
+  }
+}

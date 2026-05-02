@@ -1,0 +1,80 @@
+{
+  "en": {
+    "title": "Polling Day Rehearsal",
+    "questions": [
+      {
+        "id": "q1",
+        "text": "What do you do first when you arrive at the polling station?",
+        "options": [
+          "Go straight to a voting booth",
+          "Present your ID to the poll worker",
+          "Leave"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q2",
+        "text": "What should you do if your name is not on the voter list?",
+        "options": [
+          "Go home",
+          "Vote anyway",
+          "Ask for a provisional ballot"
+        ],
+        "correctAnswer": 2
+      }
+    ],
+    "nextBtn": "Get Result"
+  },
+  "es": {
+    "title": "Ensayo del Día de las Elecciones",
+    "questions": [
+      {
+        "id": "q1",
+        "text": "¿Qué haces primero al llegar al centro de votación?",
+        "options": [
+          "Ir directo a la cabina de votación",
+          "Presentar tu identificación al trabajador electoral",
+          "Irme"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q2",
+        "text": "¿Qué debes hacer si tu nombre no está en la lista de votantes?",
+        "options": [
+          "Ir a casa",
+          "Votar de todos modos",
+          "Pedir una boleta provisional"
+        ],
+        "correctAnswer": 2
+      }
+    ],
+    "nextBtn": "Obtener Resultado"
+  },
+  "hi": {
+    "title": "मतदान दिवस अभ्यास",
+    "questions": [
+      {
+        "id": "q1",
+        "text": "मतदान केंद्र पर पहुंचने पर आप सबसे पहले क्या करते हैं?",
+        "options": [
+          "सीधे वोटिंग बूथ पर जाएं",
+          "चुनाव कार्यकर्ता को अपनी आईडी दिखाएं",
+          "छोड़ दें"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": "q2",
+        "text": "यदि आपका नाम मतदाता सूची में नहीं है तो आपको क्या करना चाहिए?",
+        "options": [
+          "घर जाएं",
+          "वैसे भी वोट दें",
+          "अनंतिम मतपत्र के लिए पूछें"
+        ],
+        "correctAnswer": 2
+      }
+    ],
+    "nextBtn": "परिणाम प्राप्त करें"
+  }
+}

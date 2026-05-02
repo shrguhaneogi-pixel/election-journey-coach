@@ -1,0 +1,86 @@
+{
+  "en": {
+    "landing": {
+      "title": "Election Journey Coach",
+      "subtitle": "Get ready for polling day with a guided rehearsal.",
+      "startBtn": "Start Journey"
+    },
+    "onboarding": {
+      "title": "How it works",
+      "steps": [
+        "1. Select your language.",
+        "2. Review the timeline of events.",
+        "3. Check your documents.",
+        "4. Rehearse polling day steps.",
+        "5. Get your readiness score."
+      ],
+      "nextBtn": "Continue"
+    },
+    "languageSelect": {
+      "title": "Choose your preferred language",
+      "nextBtn": "Next"
+    },
+    "result": {
+      "title": "Your Readiness Score",
+      "readyMessage": "You are fully prepared! Good luck on election day.",
+      "notReadyMessage": "You have a few things to review. Take a look at the checklist and rehearsal questions again.",
+      "restartBtn": "Start Over"
+    }
+  },
+  "es": {
+    "landing": {
+      "title": "Entrenador de Viaje Electoral",
+      "subtitle": "Prepárate para el día de las elecciones con un ensayo guiado.",
+      "startBtn": "Iniciar Viaje"
+    },
+    "onboarding": {
+      "title": "Cómo funciona",
+      "steps": [
+        "1. Selecciona tu idioma.",
+        "2. Revisa la línea de tiempo de eventos.",
+        "3. Revisa tus documentos.",
+        "4. Ensaya los pasos del día de las elecciones.",
+        "5. Obtén tu puntuación de preparación."
+      ],
+      "nextBtn": "Continuar"
+    },
+    "languageSelect": {
+      "title": "Elige tu idioma preferido",
+      "nextBtn": "Siguiente"
+    },
+    "result": {
+      "title": "Tu Puntuación de Preparación",
+      "readyMessage": "¡Estás totalmente preparado! Buena suerte en el día de las elecciones.",
+      "notReadyMessage": "Tienes algunas cosas que repasar. Revisa la lista de verificación y las preguntas de ensayo nuevamente.",
+      "restartBtn": "Empezar de Nuevo"
+    }
+  },
+  "hi": {
+    "landing": {
+      "title": "चुनाव यात्रा कोच",
+      "subtitle": "निर्देशित अभ्यास के साथ मतदान दिवस के लिए तैयार हो जाएं।",
+      "startBtn": "यात्रा शुरू करें"
+    },
+    "onboarding": {
+      "title": "यह कैसे काम करता है",
+      "steps": [
+        "1. अपनी भाषा चुनें।",
+        "2. घटनाओं की समयरेखा की समीक्षा करें।",
+        "3. अपने दस्तावेजों की जाँच करें।",
+        "4. मतदान दिवस के चरणों का अभ्यास करें।",
+        "5. अपनी तैयारी का स्कोर प्राप्त करें।"
+      ],
+      "nextBtn": "जारी रखें"
+    },
+    "languageSelect": {
+      "title": "अपनी पसंदीदा भाषा चुनें",
+      "nextBtn": "अगला"
+    },
+    "result": {
+      "title": "आपका तैयारी स्कोर",
+      "readyMessage": "आप पूरी तरह से तैयार हैं! चुनाव के दिन के लिए शुभकामनाएँ।",
+      "notReadyMessage": "आपको कुछ बातों की समीक्षा करनी है। चेकलिस्ट और अभ्यास प्रश्नों को फिर से देखें।",
+      "restartBtn": "पुनः प्रारंभ करें"
+    }
+  }
+}

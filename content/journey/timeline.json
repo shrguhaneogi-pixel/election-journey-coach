@@ -1,0 +1,29 @@
+{
+  "en": {
+    "title": "Important Dates",
+    "events": [
+      { "date": "Oct 1", "event": "Voter Registration Deadline" },
+      { "date": "Oct 15", "event": "Mail-in Ballots Sent" },
+      { "date": "Nov 5", "event": "Election Day" }
+    ],
+    "nextBtn": "Next"
+  },
+  "es": {
+    "title": "Fechas Importantes",
+    "events": [
+      { "date": "1 de Oct", "event": "Fecha Límite de Registro de Votantes" },
+      { "date": "15 de Oct", "event": "Envío de Boletas por Correo" },
+      { "date": "5 de Nov", "event": "Día de las Elecciones" }
+    ],
+    "nextBtn": "Siguiente"
+  },
+  "hi": {
+    "title": "महत्वपूर्ण तिथियां",
+    "events": [
+      { "date": "1 अक्टूबर", "event": "मतदाता पंजीकरण की समय सीमा" },
+      { "date": "15 अक्टूबर", "event": "मेल-इन बैलेट भेजे गए" },
+      { "date": "5 नवंबर", "event": "चुनाव का दिन" }
+    ],
+    "nextBtn": "अगला"
+  }
+}
