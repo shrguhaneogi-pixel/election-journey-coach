@@ -3,5 +3,9 @@
   "timeline": "Election Timeline",
   "checklist": "Document Checklist",
   "rehearsal": "Polling Day Practice",
-  "result": "Readiness Result"
+  "result": "Readiness Result",
+  "auth": {
+    "signIn": "Sign in with Google",
+    "signOut": "Sign out"
+  }
 }

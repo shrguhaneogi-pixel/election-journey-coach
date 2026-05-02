@@ -4,9 +4,11 @@ import React from 'react';
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase/client';
 import { useAppState } from '@/app/journey/context';
+import { getDictionary } from '@/lib/i18n/dictionary';
 
 export function AuthHeader() {
-  const { user, loadingAuth } = useAppState();
+  const { state, user, loadingAuth } = useAppState();
+  const dict = getDictionary(state.context.language);
 
   const handleSignIn = async () => {
     const provider = new GoogleAuthProvider();
@@ -38,7 +40,7 @@ export function AuthHeader() {
             onClick={handleSignOut}
             className="text-sm text-red-500 hover:text-red-700 font-bold transition-colors"
           >
-            Sign out
+            {dict.auth?.signOut || "Sign out"}
           </button>
         </div>
       ) : (
@@ -52,7 +54,7 @@ export function AuthHeader() {
             <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
             <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
           </svg>
-          Sign in with Google
+          {dict.auth?.signIn || "Sign in with Google"}
         </button>
       )}
     </div>

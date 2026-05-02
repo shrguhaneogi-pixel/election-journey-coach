@@ -30,15 +30,14 @@ describe('stateMachine', () => {
     expect(state.currentState).toBe('REHEARSAL');
   });
 
-  it('should update language on SELECT_LANGUAGE only when in LANGUAGE_SELECT state', () => {
-    let state: MachineState = { ...initialState, currentState: 'LANGUAGE_SELECT' };
-    state = appReducer(state, { type: 'SELECT_LANGUAGE', payload: 'es' });
+  it('should update language on SELECT_LANGUAGE from any state', () => {
+    let state = appReducer(initialState, { type: 'SELECT_LANGUAGE', payload: 'es' });
     expect(state.context.language).toBe('es');
 
-    // Should ignore if not in LANGUAGE_SELECT state
+    // Should also work from LANDING
     state.currentState = 'LANDING';
-    state = appReducer(state, { type: 'SELECT_LANGUAGE', payload: 'en' });
-    expect(state.context.language).toBe('es');
+    state = appReducer(state, { type: 'SELECT_LANGUAGE', payload: 'hi' });
+    expect(state.context.language).toBe('hi');
   });
 
   it('should toggle checklist items on TOGGLE_CHECKLIST_ITEM', () => {

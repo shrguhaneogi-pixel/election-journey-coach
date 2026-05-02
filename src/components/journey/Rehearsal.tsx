@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAppState } from '@/app/journey/context';
 import { getRehearsalContent, getChecklistContent } from '@/lib/content/loader';
+import { focusMainHeading } from '@/lib/accessibility/aria';
 
 export function Rehearsal() {
   const { state, dispatch } = useAppState();
@@ -14,6 +15,10 @@ export function Rehearsal() {
   const currentQuestion = questions[currentQuestionIdx];
   const { rehearsalAnswers } = state.context;
   const selectedAnswer = rehearsalAnswers[currentQuestion.id];
+
+  useEffect(() => {
+    focusMainHeading();
+  }, [currentQuestionIdx]); // Refocus on every new question
 
   const handleSelectOption = (index: number) => {
     dispatch({ 
@@ -44,22 +49,24 @@ export function Rehearsal() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-white">
-      <div className="max-w-md w-full">
-        <div className="text-sm text-blue-500 font-bold tracking-wider mb-2 uppercase text-center">
+    <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-white">
+      <section className="max-w-md w-full" aria-labelledby="main-heading">
+        <div className="text-sm text-blue-500 font-bold tracking-wider mb-2 uppercase text-center" aria-live="polite">
           {currentContent.title} • {currentQuestionIdx + 1} / {questions.length}
         </div>
         
-        <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center min-h-[4rem]">
+        <h1 id="main-heading" className="text-2xl font-bold text-gray-800 mb-8 text-center min-h-[4rem]">
           {currentQuestion.text}
-        </h2>
+        </h1>
         
-        <div className="space-y-4 mb-12">
+        <div className="space-y-4 mb-12" role="radiogroup" aria-labelledby="main-heading">
           {currentQuestion.options.map((option, idx) => (
             <button
               key={idx}
+              role="radio"
+              aria-checked={selectedAnswer === idx}
               onClick={() => handleSelectOption(idx)}
-              className={`w-full text-left p-4 rounded-xl border-2 transition-all ${
+              className={`w-full text-left p-4 rounded-xl border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                 selectedAnswer === idx 
                   ? 'border-blue-500 bg-blue-50 text-blue-800 font-bold' 
                   : 'border-gray-200 text-gray-700 hover:border-blue-300'
@@ -73,7 +80,8 @@ export function Rehearsal() {
         <button
           onClick={handleNext}
           disabled={selectedAnswer === undefined}
-          className={`w-full px-6 py-4 font-bold rounded-xl shadow transition-colors ${
+          aria-disabled={selectedAnswer === undefined}
+          className={`w-full px-6 py-4 font-bold rounded-xl shadow transition-colors focus:ring-4 focus:ring-blue-300 ${
             selectedAnswer !== undefined 
               ? 'bg-blue-600 text-white hover:bg-blue-700' 
               : 'bg-gray-200 text-gray-400 cursor-not-allowed'
@@ -81,7 +89,7 @@ export function Rehearsal() {
         >
           {currentQuestionIdx < questions.length - 1 ? 'Next Question' : currentContent.nextBtn}
         </button>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

@@ -3,5 +3,9 @@
   "timeline": "Línea de Tiempo",
   "checklist": "Lista de Documentos",
   "rehearsal": "Ensayo del Día de las Elecciones",
-  "result": "Resultado de Preparación"
+  "result": "Resultado de Preparación",
+  "auth": {
+    "signIn": "Inicia sesión con Google",
+    "signOut": "Cerrar sesión"
+  }
 }

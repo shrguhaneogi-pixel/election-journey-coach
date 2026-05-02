@@ -1,6 +1,6 @@
-import en from '../../../../content/locales/en.json';
-import es from '../../../../content/locales/es.json';
-import hi from '../../../../content/locales/hi.json';
+import en from '../../../content/locales/en.json';
+import es from '../../../content/locales/es.json';
+import hi from '../../../content/locales/hi.json';
 import { Language } from '@/types/journey';
 
 const locales = {

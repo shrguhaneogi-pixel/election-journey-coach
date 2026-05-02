@@ -12,3 +12,10 @@
 - Authentication required for persistence
 - ALL Firebase logic must be isolated in lib/firebase
 - UI must not directly call Firestore
+
+## Phase 4 Rules
+- Translation must not affect logic
+- Always fallback to static content
+- Accessibility is mandatory for all components
+- Voice features must be optional enhancements
+- No API calls inside UI components
