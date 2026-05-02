@@ -6,6 +6,7 @@ import { getChecklistContent } from '@/lib/content/loader';
 import { focusMainHeading } from '@/lib/accessibility/aria';
 import { onKeyboardClick } from '@/lib/accessibility/keyboard';
 import { ExplainButton } from '@/components/journey/ExplainButton';
+import { StepProgress } from '@/components/journey/StepProgress';
 
 export function Checklist() {
   const { state, dispatch } = useAppState();
@@ -19,6 +20,7 @@ export function Checklist() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-white">
       <section className="max-w-md w-full" aria-labelledby="main-heading">
+        <StepProgress currentStep={4} totalSteps={5} />
         <h1 id="main-heading" className="text-3xl font-bold text-gray-800 mb-8 text-center">{currentContent.title}</h1>
         
         <div className="space-y-4 mb-12" role="group" aria-label="Required Documents">

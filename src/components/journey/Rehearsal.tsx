@@ -52,6 +52,7 @@ export function Rehearsal() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-white">
       <section className="max-w-md w-full" aria-labelledby="main-heading">
+        <StepProgress currentStep={5} totalSteps={5} />
         <div className="text-sm text-blue-500 font-bold tracking-wider mb-2 uppercase text-center" aria-live="polite">
           {currentContent.title} • {currentQuestionIdx + 1} / {questions.length}
         </div>

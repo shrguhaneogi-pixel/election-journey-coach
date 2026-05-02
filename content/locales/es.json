@@ -7,5 +7,9 @@
   "auth": {
     "signIn": "Inicia sesión con Google",
     "signOut": "Cerrar sesión"
+  },
+  "progress": {
+    "step": "Paso",
+    "of": "de"
   }
 }

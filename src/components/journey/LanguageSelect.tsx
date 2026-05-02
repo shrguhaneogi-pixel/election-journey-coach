@@ -5,6 +5,7 @@ import { useAppState } from '@/app/journey/context';
 import { getOnboardingContent } from '@/lib/content/loader';
 import { Language } from '@/types/journey';
 import { focusMainHeading } from '@/lib/accessibility/aria';
+import { StepProgress } from '@/components/journey/StepProgress';
 
 export function LanguageSelect() {
   const { state, dispatch } = useAppState();
@@ -22,6 +23,7 @@ export function LanguageSelect() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-white">
       <section className="max-w-md w-full text-center" aria-labelledby="main-heading">
+        <StepProgress currentStep={2} totalSteps={5} />
         <h1 id="main-heading" className="text-3xl font-bold text-gray-800 mb-10">{currentContent.title}</h1>
         
         <div className="grid grid-cols-2 gap-4 mb-12" role="group" aria-label="Language options">

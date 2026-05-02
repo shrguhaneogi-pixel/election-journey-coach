@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 import { useAppState } from '@/app/journey/context';
 import { getTimelineContent } from '@/lib/content/loader';
 import { focusMainHeading } from '@/lib/accessibility/aria';
+import { StepProgress } from '@/components/journey/StepProgress';
+import { generateGoogleCalendarUrl } from '@/lib/calendar/google-calendar';
 
 export function Timeline() {
   const { state, dispatch } = useAppState();
@@ -16,6 +18,7 @@ export function Timeline() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-white">
       <section className="max-w-md w-full" aria-labelledby="main-heading">
+        <StepProgress currentStep={3} totalSteps={5} />
         <h1 id="main-heading" className="text-3xl font-bold text-gray-800 mb-10 text-center">{currentContent.title}</h1>
         
         <div className="relative border-l-4 border-blue-200 ml-4 mb-12" role="list" aria-label="Timeline events">
@@ -23,7 +26,15 @@ export function Timeline() {
             <article key={idx} className="mb-8 ml-6 relative" role="listitem">
               <span className="absolute -left-[35px] top-1 w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow" aria-hidden="true"></span>
               <h2 className="text-sm font-bold text-blue-600 mb-1 uppercase tracking-wider">{evt.date}</h2>
-              <p className="text-lg text-gray-800 font-medium">{evt.event}</p>
+              <p className="text-lg text-gray-800 font-medium mb-1">{evt.event}</p>
+              <a 
+                href={generateGoogleCalendarUrl(evt.event, "Election Deadline Reminder", evt.date)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-blue-500 hover:text-blue-700 hover:underline flex items-center gap-1"
+              >
+                📅 Add to Calendar
+              </a>
             </article>
           ))}
         </div>

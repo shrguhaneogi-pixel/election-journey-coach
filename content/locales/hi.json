@@ -7,5 +7,9 @@
   "auth": {
     "signIn": "Google के साथ साइन इन करें",
     "signOut": "साइन आउट"
+  },
+  "progress": {
+    "step": "चरण",
+    "of": "में से"
   }
 }

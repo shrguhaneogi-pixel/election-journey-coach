@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { useAppState } from '@/app/journey/context';
 import { getOnboardingContent } from '@/lib/content/loader';
 import { focusMainHeading } from '@/lib/accessibility/aria';
+import { StepProgress } from '@/components/journey/StepProgress';
 
 export function Onboarding() {
   const { state, dispatch } = useAppState();
@@ -16,6 +17,7 @@ export function Onboarding() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-white">
       <section className="max-w-md w-full" aria-labelledby="main-heading">
+        <StepProgress currentStep={1} totalSteps={5} />
         <h1 id="main-heading" className="text-3xl font-bold text-gray-800 mb-8 text-center">{currentContent.title}</h1>
         <ul className="space-y-4 mb-12" aria-label="Onboarding steps">
           {currentContent.steps.map((step, idx) => (

@@ -7,5 +7,9 @@
   "auth": {
     "signIn": "Sign in with Google",
     "signOut": "Sign out"
+  },
+  "progress": {
+    "step": "Step",
+    "of": "of"
   }
 }
