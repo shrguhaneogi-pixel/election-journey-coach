@@ -19,9 +19,19 @@ vi.mock('@/lib/firebase/client', () => ({
 
 vi.mock('firebase/auth', () => ({
   onAuthStateChanged: vi.fn(() => () => {}),
-  GoogleAuthProvider: vi.fn(),
+  GoogleAuthProvider: vi.fn().mockImplementation(() => ({
+    addScope: vi.fn(),
+  })),
   signInWithPopup: vi.fn(),
+  signInWithRedirect: vi.fn(),
+  getRedirectResult: vi.fn().mockResolvedValue(null),
   signOut: vi.fn(),
+  browserLocalPersistence: 'LOCAL',
+  setPersistence: vi.fn().mockResolvedValue(undefined),
+  AuthErrorCodes: {
+    POPUP_BLOCKED: 'auth/popup-blocked',
+    POPUP_CLOSED_BY_USER: 'auth/popup-closed-by-user',
+  },
 }));
 
 vi.mock('firebase/firestore', () => ({

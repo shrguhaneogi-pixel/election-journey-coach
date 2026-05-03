@@ -1,5 +1,10 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getAuth, connectAuthEmulator } from 'firebase/auth';
+import {
+  getAuth,
+  connectAuthEmulator,
+  browserLocalPersistence,
+  setPersistence,
+} from 'firebase/auth';
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -15,10 +20,22 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-if (process.env.NODE_ENV === 'development') {
-  // Connect to local emulators if running locally
-  // We use process.env to ensure this doesn't run in production inadvertently
-  // Note: App Hosting sets NODE_ENV='production' automatically
+// ── Explicit persistence — survives page refresh and tab close ────────────
+// Firebase defaults to browserLocalPersistence, but we set it explicitly so
+// the behaviour is documented, testable, and not dependent on SDK defaults.
+if (typeof window !== 'undefined') {
+  setPersistence(auth, browserLocalPersistence).catch((err) => {
+    console.error('[Auth] Failed to set persistence:', err);
+  });
+}
+
+// ── Emulator connections ──────────────────────────────────────────────────
+// Only connect when NEXT_PUBLIC_USE_EMULATORS=true is explicitly set.
+// This prevents accidental emulator usage when running locally without them.
+if (
+  process.env.NODE_ENV === 'development' &&
+  process.env.NEXT_PUBLIC_USE_EMULATORS === 'true'
+) {
   connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
   connectFirestoreEmulator(db, '127.0.0.1', 8080);
 }
