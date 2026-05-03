@@ -4,10 +4,10 @@
 
 [Live Demo](https://election-journey-coach--election-journey-coach.us-east4.hosted.app/journey) · [Video Walkthrough](./assets/demo-walkthrough.mp4) · [Source Code](https://github.com/shrguhaneogi-pixel/election-journey-coach)
 
-![Election Journey Coach Screenshot](screenshot.png)
 ![Theme](https://img.shields.io/badge/Theme-Election%20Process%20Education-1E8E3E)
 ![Status](https://img.shields.io/badge/Status-Live%20Demo-202124)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
+![Election Journey Coach Screenshot](screenshot.png)
 
 
 ## Why This Matters
