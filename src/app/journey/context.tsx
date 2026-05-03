@@ -1,17 +1,24 @@
 'use client';
 
-import React, { createContext, useContext, useReducer, useEffect, useRef, useState, useCallback } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/lib/firebase/client';
 import { loadJourneyState, saveJourneyState } from '@/lib/firebase/journey-store';
 import { appReducer, initialState } from '@/lib/journey/state-machine';
 import { MachineState, Action } from '@/types/journey';
+import { SAVE_DEBOUNCE_MS } from '@/lib/config';
+import { logStepView, logLanguageChange } from '@/lib/firebase/analytics';
 
-/** Map our internal lang codes to BCP-47 for the HTML lang attribute */
+/** Map internal lang codes → BCP-47 for the HTML lang attribute */
 const LANG_TO_BCP47: Record<string, string> = { en: 'en', es: 'es', hi: 'hi' };
-
-/** Debounce delay for Firestore writes — batches rapid dispatches into one save */
-const SAVE_DEBOUNCE_MS = 1_500;
 
 interface StateContextType {
   state: MachineState;
@@ -27,12 +34,28 @@ export function JourneyProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const prevStep = useRef<MachineState['currentState'] | null>(null);
+  const prevLang = useRef<string | null>(null);
 
   // ── Dynamic document.lang for correct screen-reader pronunciation ─────────
   useEffect(() => {
     const bcp47 = LANG_TO_BCP47[state.context.language] ?? 'en';
     document.documentElement.lang = bcp47;
+
+    // Analytics: language changed
+    if (prevLang.current !== null && prevLang.current !== state.context.language) {
+      void logLanguageChange(state.context.language);
+    }
+    prevLang.current = state.context.language;
   }, [state.context.language]);
+
+  // ── Analytics: step transitions ───────────────────────────────────────────
+  useEffect(() => {
+    if (prevStep.current !== state.currentState) {
+      void logStepView(state.currentState);
+      prevStep.current = state.currentState;
+    }
+  }, [state.currentState]);
 
   // ── Authentication & Hydration ────────────────────────────────────────────
   useEffect(() => {

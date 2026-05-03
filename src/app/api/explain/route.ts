@@ -3,19 +3,16 @@ import { getGeminiModel } from '@/lib/ai/gemini';
 import { generateExplanationPrompt } from '@/lib/ai/prompts';
 import { validateAIExplanation } from '@/lib/ai/validator';
 import { Language } from '@/types/journey';
+import { MAX_CONTEXT_CHARS, RATE_LIMIT_MS } from '@/lib/config';
 
 const ALLOWED_LANGUAGES: readonly Language[] = ['en', 'es', 'hi'];
 
-/** Maximum length for AI context input — prevents token-exhaustion attacks */
-const MAX_CONTEXT_CHARS = 300;
-
 /**
- * In-process rate limiter: 1 call per 3 seconds per IP.
+ * In-process rate limiter: 1 call per RATE_LIMIT_MS per IP.
  * Serverless note: map resets per container — sufficient for abuse prevention
  * without requiring an external Redis dependency.
  */
 const rateLimitMap = new Map<string, number>();
-const RATE_LIMIT_MS = 3_000;
 
 function isValidLanguage(lang: unknown): lang is Language {
   return typeof lang === 'string' && (ALLOWED_LANGUAGES as string[]).includes(lang);
